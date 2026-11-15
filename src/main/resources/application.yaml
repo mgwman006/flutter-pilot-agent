@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: dockermodel
+  ai:
+    model:
+      chat: openai
+    openai:
+      chat:
+        model: ai/llama3.2
+        base-url: http://localhost:12434/engines/v1
+      api-key: dummy-key
+    mcp:
+      client:
+        streamable-http:
+          connections:
+            tante:
+              url: http://localhost:8083
+              endpoint: /mcp
+        request-timeout: 60s
+      server:
+        protocol: streamable
+
+logging:
+  level:
+    org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor: DEBUG
+server:
+  port: 8084
