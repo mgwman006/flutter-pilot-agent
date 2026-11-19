@@ -2,6 +2,12 @@ spring:
   application:
     name: dockermodel
   ai:
+    ollama:
+      chat:
+        model: llama3.2:1b
+    chat:
+      client:
+        enabled: false
     model:
       chat: openai
     openai:
@@ -9,19 +15,28 @@ spring:
         model: ai/llama3.2
         base-url: http://localhost:12434/engines/v1
       api-key: dummy-key
-    mcp:
+  security:
+    oauth2:
       client:
-        streamable-http:
-          connections:
-            tante:
-              url: http://localhost:8083
-              endpoint: /mcp
-        request-timeout: 60s
-      server:
-        protocol: streamable
+        provider:
+          tante-auth:
+            issuer-uri: ${AUTH_ISSUER_URI:http://localhost:8081/auth-manager}
+        registration:
+          property-manager-client:
+            provider: tante-auth
+            authorization-grant-type: client_credentials
+            client-id: ${PROPERTY_MANAGER_CLIENT_ID:rent-manager}
+            client-secret: ${PROPERTY_MANAGER_CLIENT_SECRET:secret}
+            scope:
+              - property.read
 
 logging:
   level:
     org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor: DEBUG
 server:
-  port: 8084
+  port: 8085
+
+property:
+  manager:
+    base:
+      url: ${PROPERTY_MANAGER_BASE_URL:http://localhost:8082/property-manager}
