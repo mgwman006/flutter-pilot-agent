@@ -1,4 +1,4 @@
-package tz.tante.aidemo.controller;
+package tz.tante.ai.controller;
 
 
 import org.slf4j.Logger;
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import tz.tante.aidemo.models.ChatFindResponseData;
-import tz.tante.aidemo.models.PropertyManagerApiResponse;
-import tz.tante.aidemo.models.propertymanager.UnitDetailsDTO;
-import tz.tante.aidemo.service.PropertyManagerService;
+import tz.tante.ai.models.ChatFindResponseData;
+import tz.tante.ai.models.PropertyManagerApiResponse;
+import tz.tante.ai.models.propertymanager.UnitDetailsDTO;
+import tz.tante.ai.service.PropertyManagerService;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -1,4 +1,4 @@
-package tz.tante.aidemo.models.propertymanager;
+package tz.tante.ai.models.propertymanager;
 
 public record BuildingSummaryDTO(
   Long id,

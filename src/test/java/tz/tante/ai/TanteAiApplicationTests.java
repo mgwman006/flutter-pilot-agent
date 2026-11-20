@@ -1,10 +1,10 @@
-package tz.tante.aidemo;
+package tz.tante.ai;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DockerModelApplicationTests
+class TanteAiApplicationTests
 {
 
 	@Test

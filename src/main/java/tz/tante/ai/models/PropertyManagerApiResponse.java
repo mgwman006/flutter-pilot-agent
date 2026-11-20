@@ -1,4 +1,4 @@
-package tz.tante.aidemo.models;
+package tz.tante.ai.models;
 
 public record PropertyManagerApiResponse<T>(
   boolean success,

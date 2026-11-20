@@ -1,4 +1,4 @@
-package tz.tante.aidemo.advisors;
+package tz.tante.ai.advisors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

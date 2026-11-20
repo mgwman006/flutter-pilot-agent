@@ -1,4 +1,4 @@
-# FlutterPilot
+# Tante AI
 
 
 Your personal AI-powered Flutter development assistant.

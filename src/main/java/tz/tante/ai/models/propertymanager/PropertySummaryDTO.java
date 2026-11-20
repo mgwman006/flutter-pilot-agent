@@ -1,4 +1,4 @@
-package tz.tante.aidemo.models.propertymanager;
+package tz.tante.ai.models.propertymanager;
 
 import java.util.List;
 

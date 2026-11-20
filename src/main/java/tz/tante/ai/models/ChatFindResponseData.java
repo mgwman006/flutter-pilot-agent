@@ -1,6 +1,6 @@
-package tz.tante.aidemo.models;
+package tz.tante.ai.models;
 
-import tz.tante.aidemo.models.propertymanager.UnitDetailsDTO;
+import tz.tante.ai.models.propertymanager.UnitDetailsDTO;
 
 public record ChatFindResponseData(
   String answer,

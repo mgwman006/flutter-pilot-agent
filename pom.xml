@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>tz.tante</groupId>
-	<artifactId>dockermodel</artifactId>
+	<artifactId>tante-ai</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Docker Model Demo</name>
-	<description>Demo project for Docker AI model integration</description>
+	<name>Tante AI</name>
+	<description>Tante AI application</description>
 	<url/>
 	<licenses>
 		<license/>

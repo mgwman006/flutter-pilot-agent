@@ -1,4 +1,4 @@
-package tz.tante.aidemo.models.propertymanager;
+package tz.tante.ai.models.propertymanager;
 
 import java.math.BigDecimal;
 import java.util.List;

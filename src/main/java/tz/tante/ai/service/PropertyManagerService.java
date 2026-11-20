@@ -1,4 +1,4 @@
-package tz.tante.aidemo.service;
+package tz.tante.ai.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -6,9 +6,9 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import feign.FeignException;
 import org.springframework.stereotype.Service;
-import tz.tante.aidemo.clients.PropertyManagerFeignApi;
-import tz.tante.aidemo.models.PropertyManagerApiResponse;
-import tz.tante.aidemo.models.propertymanager.UnitDetailsDTO;
+import tz.tante.ai.clients.PropertyManagerFeignApi;
+import tz.tante.ai.models.PropertyManagerApiResponse;
+import tz.tante.ai.models.propertymanager.UnitDetailsDTO;
 
 @Service
 public class PropertyManagerService

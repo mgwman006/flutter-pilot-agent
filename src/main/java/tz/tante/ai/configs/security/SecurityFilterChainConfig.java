@@ -1,4 +1,4 @@
-package tz.tante.aidemo.configs.security;
+package tz.tante.ai.configs.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

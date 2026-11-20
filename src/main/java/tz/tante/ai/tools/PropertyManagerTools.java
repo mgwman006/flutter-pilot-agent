@@ -1,11 +1,11 @@
-package tz.tante.aidemo.tools;
+package tz.tante.ai.tools;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
 import org.springframework.stereotype.Component;
-import tz.tante.aidemo.service.PropertyManagerService;
+import tz.tante.ai.service.PropertyManagerService;
 
 @Component
 public class PropertyManagerTools
