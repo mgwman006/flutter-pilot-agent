@@ -7,19 +7,5 @@
         "@modelcontextprotocol/server-filesystem",
         "/Users/maneno/Ai/mcp"
       ]
-    },
-    "github": {
-      "command": "docker",
-      "args": [
-        "run",
-        "-i",
-        "--rm",
-        "-e",
-        "GITHUB_PERSONAL_ACCESS_TOKEN",
-        "ghcr.io/github/github-mcp-server"
-      ],
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "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"
-      }
     }
 }
