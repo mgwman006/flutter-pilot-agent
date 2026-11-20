@@ -1,10 +1,14 @@
 spring:
   application:
     name: dockermodel
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  sql:
+    init:
+      mode: never
   ai:
-    ollama:
-      chat:
-        model: llama3.2:1b
     chat:
       client:
         enabled: false
@@ -12,7 +16,7 @@ spring:
       chat: openai
     openai:
       chat:
-        model: ai/llama3.2
+        model: docker.io/qwen2.5:latest
         base-url: http://localhost:12434/engines/v1
       api-key: dummy-key
   security:
@@ -29,6 +33,9 @@ spring:
             client-secret: ${PROPERTY_MANAGER_CLIENT_SECRET:secret}
             scope:
               - property.read
+      resourceserver:
+        jwt:
+          issuer-uri: ${AUTH_ISSUER_URI:http://localhost:8081/auth-manager}
 
 logging:
   level:
@@ -39,4 +46,4 @@ server:
 property:
   manager:
     base:
-      url: ${PROPERTY_MANAGER_BASE_URL:http://localhost:8082/property-manager}
+      url: http://localhost:8082/property-manager

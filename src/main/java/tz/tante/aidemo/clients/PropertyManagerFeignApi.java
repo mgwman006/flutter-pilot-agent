@@ -1,10 +1,8 @@
 package tz.tante.aidemo.clients;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import feign.Param;
-import feign.RequestLine;
 import org.springframework.cloud.openfeign.FeignClient;
-import tz.tante.aidemo.models.PropertyManagerApiResponse;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(
   name = "property-manager",
@@ -12,6 +10,6 @@ import tz.tante.aidemo.models.PropertyManagerApiResponse;
 )
 public interface PropertyManagerFeignApi
 {
-  @RequestLine("GET /v1/units/{unitId}")
-  PropertyManagerApiResponse<JsonNode> getUnitDetails(@Param("unitId") Long unitId);
+  @GetMapping("/v1/units/{unitId}")
+  String getUnitDetails(@PathVariable("unitId") Long unitId);
 }
