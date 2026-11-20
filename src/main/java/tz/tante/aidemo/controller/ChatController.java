@@ -59,7 +59,7 @@ public class ChatController
         verifiedUnitContext = """
           Verified unit data from Tante Property Manager:
           %s
-          Use only this verified data for unit facts. Do not add missing details.
+          Use only this verified data for unit facts. Do not add missing numerical values.
           """.formatted(unitDetails);
       }
       catch (IllegalStateException e)
