@@ -6,10 +6,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import tz.tante.aidemo.models.ChatFindResponseData;
+import tz.tante.aidemo.models.PropertyManagerApiResponse;
+import tz.tante.aidemo.models.propertymanager.UnitDetailsDTO;
 import tz.tante.aidemo.service.PropertyManagerService;
 
 import java.util.regex.Matcher;
@@ -36,39 +41,66 @@ public class ChatController
   Resource systemPromptTemplate;
 
   @GetMapping("/find")
-  public String findProperty(@RequestParam String message, @RequestParam String customerName, @RequestParam Long userAccountId)
+  public ResponseEntity<PropertyManagerApiResponse<ChatFindResponseData>> findProperty(
+    @RequestParam String message,
+    @RequestParam String customerName,
+    @RequestParam Long userAccountId
+  )
   {
     Long unitId = extractUnitId(message);
+    UnitDetailsDTO unitDetails = null;
+    String verifiedUnitContext = "";
+
     if (unitId != null)
     {
       try
       {
-        return propertyManagerService.getUnitDetailsJson(unitId);
+        unitDetails = propertyManagerService.getUnitDetails(unitId);
+        verifiedUnitContext = """
+          Verified unit data from Tante Property Manager:
+          %s
+          Use only this verified data for unit facts. Do not add missing details.
+          """.formatted(unitDetails);
       }
       catch (IllegalStateException e)
       {
         logger.error("Unit lookup failed for ID {} and message '{}'", unitId, message, e);
-        return "Sorry, I could not retrieve unit " + unitId + " from the property database right now.";
+        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
+          .body(new PropertyManagerApiResponse<>(
+            false,
+            "Failed to retrieve unit " + unitId + " from the property database.",
+            null,
+            HttpStatus.SERVICE_UNAVAILABLE.value()
+          ));
       }
     }
 
     try
     {
-      return chatClient
+      String answer = chatClient
         .prompt()
         .advisors(advisorSpec -> advisorSpec.param(CONVERSATION_ID,userAccountId))
         .system(systemPromptTemplate)
         .user("""
           Customer: %s
           User question: %s
-          """.formatted(customerName, message))
+          %s
+          """.formatted(customerName, message, verifiedUnitContext))
         .call()
         .content();
+      ChatFindResponseData responseData = new ChatFindResponseData(answer, "llm", unitId, unitDetails);
+      return ResponseEntity.ok(new PropertyManagerApiResponse<>(true, "Request successful", responseData, HttpStatus.OK.value()));
     }
     catch (RuntimeException e)
     {
       logger.error("Chat model error for message '{}'", message, e);
-      return "Sorry, I was unable to complete that request. Please try again.";
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+        .body(new PropertyManagerApiResponse<>(
+          false,
+          "Sorry, I was unable to complete that request. Please try again.",
+          null,
+          HttpStatus.INTERNAL_SERVER_ERROR.value()
+        ));
     }
   }
 
